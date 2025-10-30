@@ -1,0 +1,50 @@
+
+
+.project-card {
+  border-radius: 1rem 5rem 1rem 1rem;
+  
+}
+
+.project-header {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.project-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-orange);
+  object-fit: cover;
+}
+
+
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+
+.project-stars {
+  color: var(--primary-text);
+}
+
+.project-link {
+  color: var(--primary-text);
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 0.75rem;
+}
+.project-content a, .project-content a:visited {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
