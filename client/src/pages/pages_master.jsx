@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from '../layouts/default.jsx';
+import Egg from './egg/egg.jsx';
 import Home from './home/home.jsx';
 import About from './about/about.jsx';
 import Contact from './contact/contact.jsx';
@@ -13,6 +14,7 @@ export default function PagesMaster() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/education" element={<Education />} />
+        <Route path="/egg" element={<Egg />} />
       </Route>
     </Routes>
   );
