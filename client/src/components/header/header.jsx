@@ -9,7 +9,7 @@ export default function Header() {
 
   useEffect(() => {
     async function fetchLinks() {
-      const res = await fetch('/api/test');
+      const res = await fetch('/api/navlinks');
       if (res.ok) {
         const links = await res.json();
         setHeaderLinks(links.navlinks);

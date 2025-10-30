@@ -13,7 +13,9 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './dist',
+    outDir: './dist'
+  }
+});
     // emptyOutDir: true,
     // rollupOptions: {
     //   external: [/^\/images\/.*/],
@@ -26,5 +28,4 @@ export default defineConfig({
     //     format: 'esm'
     //   }
     // }
-  }
-});
+  

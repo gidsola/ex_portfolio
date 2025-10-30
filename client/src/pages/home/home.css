@@ -35,15 +35,15 @@
   color: var(--secondary-blue);
 }
 
-.egg-container:hover {
+/* .egg-container:hover {
   background-image: url('/images/leaf.png');
   background-size: contain;
   background-position: right;
   background-repeat: no-repeat;
   transform: scale(1.5);
-}
+} */
 
-.egg-container:hover .egg-text{
+/* .egg-container:hover .egg-text{
   display: block;
-}
+} */
 

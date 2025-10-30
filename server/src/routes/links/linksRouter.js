@@ -1,8 +1,13 @@
 
 import { Router } from 'express';
-import Controller from '../../controllers/linksController.js'
+import Controller from '../../controllers/headerNavController.js'
 
 export default Router()
+
+// .get('/', async (req, res) => {
+//   const links = await Link.find();
+//   res.json(links);
+// })
 
   /**
    * GET link

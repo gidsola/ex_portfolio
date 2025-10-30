@@ -1,9 +1,17 @@
 import 'dotenv/config';
+import mongoose from 'mongoose';
 import express, { json, static as serveStatic } from 'express';
 import cors from 'cors';
 import { join } from 'path';
 // import ssrRoute from './routes/ssr.js';
 import routeMaster from './routes/routeMaster.js';
+
+try {
+  mongoose.connect(process.env.MONGO_CSTRING);
+}
+catch (e) {
+  console.error('MongoDB connection error:', e);
+};
 
 const app = express();
 
@@ -19,7 +27,8 @@ app
 routeMaster(app);
 // ssrRoute(app);
 
-const clientPath = join(process.cwd(), 'client/dist');
+// only used in production
+const clientPath = join(process.cwd(), '../client/dist');
 app
   .use(serveStatic(clientPath))
   .get(/^(?!\/api).*/, (_, res) => {

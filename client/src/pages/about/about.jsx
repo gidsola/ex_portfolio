@@ -1,9 +1,23 @@
 
-
-
+import { useEffect, useState } from 'react';
 import './about.css';
 
 export default function About() {
+
+  const [skills, setSkills] = useState([]);
+
+  useEffect(() => {
+    async function fetchSkills() {
+      const res = await fetch('/api/about');
+      if (res.ok) {
+        const data = await res.json();
+        setSkills(data.skills);
+      } else {
+        console.log("Failed to fetch skills");
+      }
+    }
+    fetchSkills();
+  }, []);
 
   return (
     <div className="about-me">
@@ -41,9 +55,9 @@ export default function About() {
           <section className="skills-section">
             <h2>Skills</h2>
             <div className="skills-grid">
-              {/* {pageData.skills.map((skill, index) => (
+              {skills.map((skill, index) => (
                 <span key={index} className="card-tag">{skill}</span>
-              ))} */}
+              ))}
             </div>
           </section>
 

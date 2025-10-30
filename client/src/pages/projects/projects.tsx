@@ -118,22 +118,38 @@ type GithubProject = {
   network_count: number,
   subscribers_count: number
 };
-type Repo = { url: string };
-interface ProjectPageData {
-  repos: Repo[];
-  projects?: GithubProject[]
-};
 
-export default function Projects({ pageData }: { pageData: ProjectPageData }) {
+
+
+import { useEffect, useState } from 'react';
+
+export default function Projects(/*{ pageData }: { pageData: ProjectPageData }*/) {
+
+  const [projects, setProjects] = useState<GithubProject[]>([]);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      const res = await fetch('/api/projects');
+      if (res.ok) {
+        const data = await res.json();
+        setProjects(data.projects);
+      } else {
+        console.log("Failed to fetch projects");
+      }
+    }
+    fetchProjects();
+  }, []);
+
+
   return (
     <div className="page">
       <div className="page-container">
         <h1 className="section-title">My Projects</h1>
         <div className="grid">
 
-          {/* {pageData.projects && pageData.projects.map((project) => (
+          {projects && projects.map((project) => (
             <div key={project.id} className="card project-card cardhover">
-              <div className="card-header project-header">
+              {/* <div className="card-header project-header">
                 {project.owner.avatar_url && (
                   <img
                     src={project.owner.avatar_url}
@@ -141,7 +157,7 @@ export default function Projects({ pageData }: { pageData: ProjectPageData }) {
                     className="project-avatar"
                   />
                 )}
-              </div>
+              </div> */}
 
               <div className="container">
                 <h3 className="card-title">{project.name}</h3>
@@ -165,7 +181,7 @@ export default function Projects({ pageData }: { pageData: ProjectPageData }) {
                 </a>
               </div>
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@
   --secondary-orange: #e29024c5;
 
   /*happy here*/
-  --bodybg-dark: rgba(48, 48, 48, 0.75);
+  --bodybg-dark: rgba(2, 2, 2, 0.75);
   --dark-innerbox: #50575ed0;
   --dark-card-background: linear-gradient(135deg, var(--bodybg-dark), var(--dark-innerbox));
 
@@ -131,7 +131,7 @@ h2:after {
   position: sticky;
   top: 0;
   width: 100%;
-  background: linear-gradient(135deg, rgb(48, 48, 48), rgb(82, 98, 168), rgb(48, 48, 48));
+  /* background: linear-gradient(135deg, rgb(48, 48, 48), rgb(85, 193, 255), rgb(48, 48, 48)); */
   box-shadow: var(--box-shadow);
   z-index: 999;
 }
@@ -174,16 +174,19 @@ h2:after {
   color: var(--primary-text);
   text-decoration: none;
   padding: 0 1rem;
+  border: 1px solid transparent;
   border-radius: 4px;
-  transition: all 2.5s ease-in-out;
+  /* transition: all 2.5s ease-in-out; */
 }
 
 .nav-list a:hover {
-  background-image: url('/images/leaf.png');
+  color: rgba(104, 198, 252, 0.993);
+  border: 1px solid rgba(104, 198, 252, 0.993);
+  /* background-image: url('/images/leaf.png');
   background-repeat: no-repeat;
   background-position: left;
   opacity: 1;
-  background-position: right;
+  background-position: right; */
 }
 
 .mobile-header {

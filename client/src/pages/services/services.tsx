@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from 'react';
 import './services.css';
 
 type Service = {
@@ -12,15 +13,36 @@ interface ServicesPageData {
   offered: Service[]
 };
 
-export default function Services({ pageData }: { pageData: ServicesPageData }) {
+export default function Services() {
+
+  const [servicesData, setServicesData] = useState<ServicesPageData>({
+  intro: '',
+  offered: []
+});
+
+  useEffect(() => {
+    async function fetchServices() {
+      const res = await fetch('/api/services');
+      if (res.ok) {
+        const data = await res.json();
+        // console.log("Datas: ", data);
+        setServicesData(data);
+      } else {
+        console.log("Failed to fetch services");
+      }
+    }
+    fetchServices();
+  }, []);
+
+
   return (
     <div className="page">
       <div className="page-container">
         <h1 className="section-title">My Services</h1>
-        <p className="section-intro">{/*pageData.intro*/}</p>
+        <p className="section-intro">{servicesData.intro}</p>
         <div className="grid">
 
-          {/* {pageData.offered.map((service, index) => (
+          {servicesData.offered.map((service, index) => (
             <div key={index} className="card cardhover">
               <div className="card-icon">{service.icon}
                 <h3 className="card-title">{service.title}</h3>
@@ -35,7 +57,7 @@ export default function Services({ pageData }: { pageData: ServicesPageData }) {
                 </div>
               </div>
             </div>
-          ))} */}
+          ))}
         </div>
 
         <div className="cta">
