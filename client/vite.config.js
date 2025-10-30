@@ -11,21 +11,5 @@ export default defineConfig({
         changeOrigin: true
       }
     }
-  },
-  build: {
-    outDir: './dist'
   }
 });
-    // emptyOutDir: true,
-    // rollupOptions: {
-    //   external: [/^\/images\/.*/],
-    //   input: {
-    //     main: './src/main.jsx',
-    //     ssr: './src/ssr.jsx'
-    //   },
-    //   output: {
-    //     entryFileNames: '[name].js',
-    //     format: 'esm'
-    //   }
-    // }
-  
