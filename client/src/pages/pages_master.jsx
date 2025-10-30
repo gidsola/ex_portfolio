@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from '../layouts/default.jsx';
 import Home from './home/home.jsx';
 import About from './about/about.jsx';
+import Contact from './contact/contact.jsx';
 
 export default function PagesMaster() {
   return (
@@ -9,6 +10,7 @@ export default function PagesMaster() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Route>
     </Routes>
   );
