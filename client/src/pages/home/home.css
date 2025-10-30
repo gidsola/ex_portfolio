@@ -1,0 +1,49 @@
+.homepage {
+  min-height: calc(100vh - 69px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-card-background);
+  padding: 2rem;
+}
+
+.hero-section {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+
+  /* transition: transform 0.3s ease;
+  transition: background-image 0.3s ease; */
+}
+
+.egg-text {
+  color: var(--secondary-blue);
+  display: none;
+}
+
+.egg-text a, .egg-text a:visited {
+  text-decoration: none;
+  color: var(--secondary-blue);
+}
+
+.egg-container:hover {
+  background-image: url('/images/leaf.png');
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  transform: scale(1.5);
+}
+
+.egg-container:hover .egg-text{
+  display: block;
+}
+

@@ -1,0 +1,121 @@
+.about-me {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: var(--primary-text);
+}
+
+.profile-card {
+  background: var(--dark-card-background);
+  border-radius: 1rem 5rem 1rem 1rem;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 700px;
+  overflow: hidden;
+}
+
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  display: block;
+  box-shadow: var(--box-shadow-4);
+}
+
+.about-content {
+  padding: 2rem;
+}
+
+.bio-section p {
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.details-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.detail-item {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--dark-innerbox);
+  border: 1px solid var(--dark-innerbox);
+  border-radius: 8px;
+}
+.detail-item:hover {
+  border: solid 1px var(--primary-orange);
+}
+
+.detail-item h3 {
+  color: var(--primary-blue);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.skills-section {
+  margin: 2rem 0;
+}
+
+.skills-section h2 {
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contact-section {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.contact-section h2 {
+  text-align: left;
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+}
+
+.contact-info a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.about-me h2 {
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}

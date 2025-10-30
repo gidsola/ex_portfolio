@@ -1,0 +1,16 @@
+{
+  "name": "ex_portfolio",
+  "private": true,
+  "type": "module",
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=client\" \"npm run dev --workspace=server\"",
+    "build:client": "npm run build --workspace=client",
+    "build:server": "node server/build-ssr.mjs",
+    "build": "npm run build:client && npm run build:server",
+    "start": "NODE_ENV=production node server/src/server.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
