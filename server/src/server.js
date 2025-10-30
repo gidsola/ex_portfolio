@@ -28,7 +28,7 @@ routeMaster(app);
 // ssrRoute(app);
 
 // only used in production
-const clientPath = join(process.cwd(), '../client/dist');
+const clientPath = join(process.cwd(), 'client/dist');
 app
   .use(serveStatic(clientPath))
   .get(/^(?!\/api).*/, (_, res) => {
