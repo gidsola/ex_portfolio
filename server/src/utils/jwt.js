@@ -1,4 +1,7 @@
-/** function provided by class zip available on luminate */
+/**
+ * week 6 content code
+ */
+
 
 import jwt from 'jsonwebtoken';
 
@@ -14,6 +17,6 @@ const generateToken = (user) => {
             expiresIn: '30d'
         }
     );
-}
+};
 
 export default generateToken;

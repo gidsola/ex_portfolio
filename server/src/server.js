@@ -1,8 +1,15 @@
+
 import 'dotenv/config';
-import mongoose from 'mongoose';
-import express, { json, static as serveStatic } from 'express';
-import cors from 'cors';
 import { join } from 'path';
+import mongoose from 'mongoose';
+import express from 'express';
+
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import compress from 'compression';
+import helmet from 'helmet';
+
+import rateLimit from './middlewares/rateLimiter.js'
 import routeMaster from './routes/routeMaster.js';
 
 try {
@@ -13,17 +20,22 @@ catch (e) {
 };
 
 const app = express();
-routeMaster(app);
-
 app
   .use(cors())
-  .use(json())
-  .use(serveStatic(join(process.cwd(), 'client/dist')))
+  .use(compress())
+  .use(cookieParser())
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use(helmet())
 
-  .get(/^(?!\/api).*/, (_, res) => {
+  .use(express.static(join(process.cwd(), 'client/dist')))
+
+  .get(/^(?!\/api).*/, rateLimit, (_, res) => {
     res.sendFile(join(process.cwd(), 'client/dist', 'index.html'));
   })
 
-  .listen(process.env.PORT || 3000, () => {
+  routeMaster(app);
+
+  app.listen(process.env.PORT || 3000, () => {
     console.log(`Server running on port ${process.env.PORT || 3000} (${process.env.NODE_ENV || 'development'})`);
   });

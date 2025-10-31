@@ -3,4 +3,8 @@ import Controller from '../../controllers/projectsPageController.js';
 
 export default Router()
   .get('/', Controller.getRepos)
-  .put('/', Controller.addRepo);
+  .get('/:id', Controller.getRepoById)
+  .post('/', Controller.addRepo)
+  .put('/:id', Controller.updateRepo)
+  .delete('/:id', Controller.removeRepo)
+  .delete('/', Controller.removeAllRepos);

@@ -1,4 +1,4 @@
-"use client";
+
 import { useState } from 'react';
 import Popup from '../../components/popup/popup.js'
 import './contact.css';
@@ -13,7 +13,6 @@ import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
 //   title: string;
 //   message: string;
 // };
-// type WS_Response = {success: boolean, message: string};
 
 export default function Contact() {
 
@@ -38,89 +37,77 @@ export default function Contact() {
       message: ""
     }),
 
-    sendContactMessage = async()=>{
+    sendContactMessage = async (formData) => {
+      try {
+        const body = JSON.stringify({
+            firstname: formData.get('name').split(' ')[0] || '',
+            lastname: formData.get('name').split(' ')[1] || '',
+            email: formData.get('email'),
+            message: formData.get('message'),
+          })
+        console.log("fooorrmm", body);
+        const response = await fetch('/api/contacts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body
+        });
 
+        if (!response.ok) {
+          const errorData = await response.json();
+          return { success: false, message: errorData.error || 'Failed to send message.' };
+        }
+
+        return { success: true, message: 'Message sent successfully!' };
+      } 
+      catch (error) {
+        console.debug("Error sending message:", error);
+        return { success: false, message: 'An error occurred. Please try again.' };
+      };
     },
 
-    // sendSocketMessage = async (formData/*: FormData*/, wsUrl/*: string*/)/*: Promise<WS_Response>*/ => {
-    //   return new Promise((resolve, reject) => {
-    //     try {
-    //       const
-    //         ws = new WebSocket(wsUrl),
-    //         data = Object.fromEntries(formData.entries());
+  handleSubmit = async (e/*: React.FormEvent<HTMLFormElement>*/) => {
+    try {
+      e.preventDefault();
+      setStatusMsg({
+        showStatus: true,
+        hasError: false,
+        showLoading: true,
+        showButton: false,
+        title: "Sending...",
+        message: "Your message is being sent.",
+      });
 
-    //       ws.onopen = () => {
-    //         ws.send(JSON.stringify({ type: "contact", ...data }));
-    //       };
-
-    //       ws.onmessage = (event) => {
-
-    //         const response = JSON.parse(event.data);
-    //         // console.log("RESPONSE: ", response);
-    //         ws.close();
-    //         resolve({ ...response });
-    //       };
-
-    //       ws.onerror = (e: any) => {
-    //         ws.close();
-    //         resolve({ success: false, message: e.message });
-    //       };
-
-    //       setTimeout(() => {
-    //         if (ws.readyState !== WebSocket.OPEN) {
-    //           ws.close();
-    //           reject({ success: false, message: 'Failed to connect to server.' });
-    //         };
-    //       }, 3000);
-
-    //     }
-    //     catch (e: any) {
-    //       reject({ success: false, message: e.message });
-    //     };
-    //   });
-    // },
-
-    handleSubmit = async (e/*: React.FormEvent<HTMLFormElement>*/) => {
-      try {
-        e.preventDefault();
-        setStatusMsg({
+      const
+        target = e.currentTarget,
+        response = await sendContactMessage(new FormData(target)),
+        msgbody = {
           showStatus: true,
-          hasError: false,
-          showLoading: true,
-          showButton: false,
-          title: "Sending...",
-          message: "Your message is being sent.",
-        });
-
-        const
-          target = e.currentTarget,
-          response = await sendContactMessage(new FormData(target), window.origin + '/ws'),
-          msgbody = {
-            showStatus: true,
-            hasError: response.success ? false : true,
-            showLoading: false,
-            showButton: true,
-            title: response.success ? "Success!" : "Error!",
-            message: response.success ? "Message Sent!" : "Failed to send your message. Please try again.",
-          };
-
-        await new Promise(r => setTimeout(r, 3000)); // just for kicks :)
-        setStatusMsg(msgbody);
-
-        target.reset();
-      }
-      catch (e/*: any*/) {
-        console.log("failed", e);
-        setStatusMsg({
-          showStatus: true,
-          hasError: true,
+          hasError: response.success ? false : true,
           showLoading: false,
           showButton: true,
-          title: "Error!",
-          message: "Failed to send your message. Please try again.",
-        });
-      };
+          title: response.success ? "Success!" : "Error!",
+          message: response.success ? "Message Sent!" : "Failed to send your message. Please try again.",
+        };
+
+      await new Promise(r => setTimeout(r, 3000)); // just for kicks :)
+      setStatusMsg(msgbody);
+
+      target.reset();
+    }
+    catch (e/*: any*/) {
+      console.debug("failed", e);
+      setStatusMsg({
+        showStatus: true,
+        hasError: true,
+        showLoading: false,
+        showButton: true,
+        title: "Error!",
+        message: "Failed to send your message. Please try again.",
+      });
     };
+  };
 
   return (
     <div className="page">
@@ -223,10 +210,7 @@ export default function Contact() {
               </button>
             </form>
 
-
             <Popup submitStatus={submitStatus} clearStatus={clearStatus} />
-
-
 
           </div>
         </div>
