@@ -14,13 +14,21 @@ export default {
       }
       const reposWithDetails = await Promise.all(
         projects.repos.map(async (repo) => {
-          const response = await fetch(repo.url);
+          const response = await fetch(repo.url, {
+            method: "GET",
+            headers: {
+              //https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api?apiVersion=2022-11-28
+              "Authorization": `Bearer ${process.env.GITHUB_PAT}`,
+              "X-GitHub-Api-Version": `${process.env.GITHUB_API_VERSION}`
+            }
+          });
+
           if (!response.ok) throw new Error(`Failed to fetch repository: ${repo.url}`);
           return response.json();
         })
       );
       res.json({ projects: reposWithDetails });
-    } 
+    }
     catch (e) {
       console.error("Error fetching repositories:", e);
       res.status(500).json({ error: "Server Error" });
@@ -44,7 +52,7 @@ export default {
       if (!response.ok) throw new Error(`Failed to fetch repository: ${repo.url}`);
       const repoDetails = await response.json();
       res.json(repoDetails);
-    } 
+    }
     catch (e) {
       console.error("Error fetching repository:", e);
       res.status(500).json({ error: "Server Error" });
@@ -69,7 +77,7 @@ export default {
         await projects.save();
       }
       res.status(201).json({ message: "Repository added successfully" });
-    } 
+    }
     catch (e) {
       console.error("Error adding repository:", e);
       res.status(500).json({ error: "Server Error" });
@@ -96,7 +104,7 @@ export default {
       repo.url = url;
       await projects.save();
       res.json({ message: "Repository updated successfully" });
-    } 
+    }
     catch (e) {
       console.error("Error updating repository:", e);
       res.status(500).json({ error: "Server Error" });
@@ -119,7 +127,7 @@ export default {
       repo.remove();
       await projects.save();
       res.json({ message: "Repository removed successfully" });
-    } 
+    }
     catch (e) {
       console.error("Error removing repository:", e);
       res.status(500).json({ error: "Server Error" });
@@ -138,7 +146,7 @@ export default {
       projects.repos = [];
       await projects.save();
       res.json({ message: "All repositories removed successfully" });
-    } 
+    }
     catch (e) {
       console.error("Error removing all repositories:", e);
       res.status(500).json({ error: "Server Error" });
