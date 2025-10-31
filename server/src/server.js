@@ -10,7 +10,7 @@ import compress from 'compression';
 import helmet from 'helmet';
 
 import rateLimit from './middlewares/rateLimiter.js'
-import routeMaster from './routes/routeMaster.js';
+import apiRouteMaster from './routes/routeMaster.js';
 
 try {
   mongoose.connect(process.env.MONGO_CSTRING);
@@ -34,7 +34,7 @@ app
     res.sendFile(join(process.cwd(), 'client/dist', 'index.html'));
   })
 
-  routeMaster(app);
+  apiRouteMaster(app);
 
   app.listen(process.env.PORT || 3000, () => {
     console.log(`Server running on port ${process.env.PORT || 3000} (${process.env.NODE_ENV || 'development'})`);
