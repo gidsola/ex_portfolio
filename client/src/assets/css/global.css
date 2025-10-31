@@ -11,7 +11,6 @@
   --primary-orange: #d88f31;
   --secondary-orange: #e29024c5;
 
-  /*happy here*/
   --bodybg-dark: rgba(2, 2, 2, 0.75);
   --dark-innerbox: #50575ed0;
   --dark-card-background: linear-gradient(135deg, var(--bodybg-dark), var(--dark-innerbox));
@@ -130,9 +129,9 @@ h2:after {
 .header {
   position: sticky;
   top: 0;
-  width: 100%;
-  /* background: linear-gradient(135deg, rgb(48, 48, 48), rgb(85, 193, 255), rgb(48, 48, 48)); */
-  box-shadow: var(--box-shadow);
+  /* width: 100%; */
+  background: linear-gradient(135deg, rgb(48, 48, 48),  rgb(2, 63, 82), rgb(48, 48, 48));
+  /* box-shadow: var(--box-shadow); */
   z-index: 999;
 }
 
